@@ -1,7 +1,7 @@
 //
 // Created by Amrou on 02/05/2023.
 //
-#include "../include/notoufy.h"
+#include "notoufy.h"
 #include "gtest/gtest.h"
 #include <iostream>
 
