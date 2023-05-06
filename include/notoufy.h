@@ -22,7 +22,7 @@ concept lockable = requires(Mutex mx) {
                    };
 
 template <typename Ifc, typename Mutex = NullMutex>
-  requires lockable<Mutex>
+  requires lockable<Mutex> // This is not necessary but the compiler error is nicer
 class Notifier {
 private:
   std::vector<std::weak_ptr<Ifc>> observers;
