@@ -16,7 +16,14 @@ public:
 
 using Multithreaded = std::mutex;
 
-template <typename Ifc, typename Mutex = NullMutex> class Notifier {
+template <typename Mutex>
+concept lockable = requires(Mutex mx) {
+                     { mx.lock() } -> std::same_as<void>;
+                   };
+
+template <typename Ifc, typename Mutex = NullMutex>
+  requires lockable<Mutex>
+class Notifier {
 private:
   std::vector<std::weak_ptr<Ifc>> observers;
   Mutex                           m;
@@ -52,6 +59,6 @@ public:
     });
   }
 };
-};     // namespace notoufy
+}; // namespace notoufy
 
 #endif // NOTOUF_NOTOUF_H
